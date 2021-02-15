@@ -1,0 +1,20 @@
+  
+<div
+*ngFor="let server of servers; let i = index"
+[@list]
+(@list.start)="onAnimationStart($event)"
+(@list.done)="onAnimationComplete($event)"
+>
+<app-server [@list] [servElement]="server">
+  <a routerLink="{{ '/server/' + i }}"
+    ><strong *ngIf="server.type === 'server'" style="color: red;">{{
+      server.name | uppercase | shorten: 5
+    }}</strong>
+
+    <strong *ngIf="server.type === 'blueprint'" style="color: blue;">{{
+      server.name | uppercase | shorten: 10
+    }}</strong>
+    <p class="float-right">{{ server.created_on | date: "fullDate" }}</p></a
+  >
+</app-server>
+</div>
